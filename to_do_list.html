@@ -1,0 +1,168 @@
+<html lang="en">
+  <!-- feel free to revise this file -->
+
+  <head>
+  <title>To Do List</title>
+    <style>
+      /*write your css rules here*/
+
+
+      .header {
+        background-color: blue;
+        padding: 30px 40px;
+        color: white;
+        text-align: center;
+      }
+
+      .checked {
+        text-decoration: line-through;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .addBtn {
+        cursor: pointer;
+        padding:10px;
+		font-size:20px;
+        width: 49%;
+
+      }
+
+      .hideBtn {
+        cursor: pointer;
+        padding: 10px;
+		font-size:20px;
+        width: 49%;
+      }
+
+
+
+      .sendEmail {
+        cursor: pointer;
+      }
+
+      ol li {
+		margin: auto;
+		width: 50%;
+        cursor: pointer;
+        padding: 12px 8px 12px 40px;
+        background: #eee;
+        font-size: 18px;
+        list-style-position: inside;
+      }
+
+      ol li:nth-child(odd) {
+        background: #f9f9f9;
+		
+      }
+
+      ol li:hover {
+        background: #ddd;
+      }
+
+      body {
+        background-image: url("dog.jpg"), url("cat.jpeg"), url("paper.jpg");
+        background-size: 450px 450px, 450px 450px, 50px 50px;
+        background-repeat: no-repeat, no-repeat, repeat;
+        background-position: Bottom right, Bottom left;
+		background-attachment: fixed, fixed;
+      }
+
+      textarea {
+        width: 100%;
+      }
+
+      li {
+        font-size: 30px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+
+
+    <div class='header'>
+      <h1>To Do list</h1>
+      <textarea id='text' rows="3">Dinner, 1; Exercise, 2; Study, 3</textarea>
+      <button id='btn_add' class='addBtn'>Add</button>
+      <button id='btn_hide' class='hideBtn'>Toggle</button>
+      <p>Send Task By using email!</p>
+      Email:<input type="email" class="email" id="email" placeholder="abc@example.com">
+
+      <button type="submit" class="sendEmail" onclick="sendMail()">
+        Send Email
+      </button>
+    </div>
+
+    <ol id='order_list'>
+    </ol>
+
+
+  </body>
+
+  <script>
+    // write your Javascript here
+    orderList = document.getElementById('order_list');
+    addBtn = document.getElementById('btn_add');
+    hideBtn = document.getElementById('btn_hide');
+    task1 = [];
+    addBtn.onclick = function() {
+      task = document.getElementById('text').value.split(';');
+      for (i = 0; i < task.length; i++) {
+        list = document.createElement('li');
+        list.innerHTML = task[i].slice(0, task.indexOf(',') - 2);
+        orderList.appendChild(list);
+        task1.push(task[i].slice(0, task.indexOf(',') - 2));
+
+
+
+        if (task[i].slice(task.indexOf(',')) == 1) {
+          list.style.color = "red";
+        } else if (task[i].slice(task.indexOf(',')) == 2) {
+          list.style.color = "black";
+        } else if (task[i].slice(task.indexOf(',')) == 3) {
+          list.style.color = "grey";
+        }
+      }
+      console.log(typeof task1);
+    }
+
+    taskContent = document.querySelector('ol');
+    taskContent.addEventListener('click', function(e) {
+      e.target.classList.toggle('checked');
+    });
+
+    taskContent.addEventListener('dblclick', function(ev) {
+      if (confirm("Do you want to delete the task?") == true) {
+        ev.target.style.display = 'none';
+      }
+
+    });
+    check = document.getElementsByClassName('checked');
+    hideBtn.onclick = function() {
+      for (i = 0; i < check.length; i++) {
+        check[i].classList.toggle('hide');
+      }
+
+    }
+
+
+    function sendMail() {
+      if (task1.length == 0) {
+        alert("Please add task first!")
+      } else {
+        var link = "mailto:" + document.getElementById('email').value +
+          "?cc=" +
+          "&body=" + encodeURIComponent('Taks to do:\n' + task1);
+
+        window.location.href = link;
+      }
+    }
+
+  </script>
+
+</html>
