@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
   <!-- feel free to revise this file -->
 
   <head>
-  <title>To Do List</title>
+    <title>To Do List</title>
     <style>
       /*write your css rules here*/
 
@@ -25,8 +24,8 @@
 
       .addBtn {
         cursor: pointer;
-        padding:10px;
-		font-size:20px;
+        padding: 10px;
+        font-size: 20px;
         width: 49%;
 
       }
@@ -34,7 +33,7 @@
       .hideBtn {
         cursor: pointer;
         padding: 10px;
-		font-size:20px;
+        font-size: 20px;
         width: 49%;
       }
 
@@ -45,8 +44,8 @@
       }
 
       ol li {
-		margin: auto;
-		width: 50%;
+        margin: auto;
+        width: 50%;
         cursor: pointer;
         padding: 12px 8px 12px 40px;
         background: #eee;
@@ -56,7 +55,7 @@
 
       ol li:nth-child(odd) {
         background: #f9f9f9;
-		
+
       }
 
       ol li:hover {
@@ -68,7 +67,7 @@
         background-size: 450px 450px, 450px 450px, 50px 50px;
         background-repeat: no-repeat, no-repeat, repeat;
         background-position: Bottom right, Bottom left;
-		background-attachment: fixed, fixed;
+        background-attachment: fixed, fixed;
       }
 
       textarea {
@@ -92,11 +91,13 @@
       <button id='btn_add' class='addBtn'>Add</button>
       <button id='btn_hide' class='hideBtn'>Toggle</button>
       <p>Send Task By using email!</p>
-      Email:<input type="email" class="email" id="email" placeholder="abc@example.com">
+      <form>
+        Email:<input type="email" class="email" id="email" placeholder="abc@example.com">
 
-      <button type="submit" class="sendEmail" onclick="sendMail()">
-        Send Email
-      </button>
+        <input type="submit" class="sendEmail" onclick="sendMail()" value='Send Email'>
+      </form>
+
+      <!--         Send Email -->
     </div>
 
     <ol id='order_list'>
@@ -144,12 +145,13 @@
 
     });
     check = document.getElementsByClassName('checked');
+    hide = document.getElementsByClassName('hide');
     hideBtn.onclick = function() {
       for (i = 0; i < check.length; i++) {
         check[i].classList.toggle('hide');
       }
-
     }
+
 
 
     function sendMail() {
@@ -167,3 +169,4 @@
   </script>
 
 </html>
+
