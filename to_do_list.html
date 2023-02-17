@@ -93,8 +93,9 @@
       <p>Send Task By using email!</p>
 
       Email:<input type="email" class="email" id="email" placeholder="abc@example.com">
+      <input type="submit" class="sendEmail" onclick="sendMail()" value='Send Email'>
 
-      <input type="submit" class="sendEmail" onclick='sendMail()' value='Send Email'>
+
 
 
       <!--         Send Email -->
@@ -163,7 +164,7 @@
       } else {
 
         var link = "mailto:" + document.getElementById('email').value +
-          "?cc=" +
+          "?subject=Task to do!" +
           "&body=" + encodeURIComponent('Taks to do:\n' + task1);
 
         window.location.href = link;
@@ -173,5 +174,3 @@
   </script>
 
 </html>
-
-
