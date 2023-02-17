@@ -112,34 +112,33 @@
     orderList = document.getElementById('order_list');
     addBtn = document.getElementById('btn_add');
     hideBtn = document.getElementById('btn_hide');
-    task1 = [];
+    task = [];
     addBtn.onclick = function() {
-      task = document.getElementById('text').value.split(';');
-      for (i = 0; i < task.length; i++) {
+      taskContent = document.getElementById('text').value.split(';');
+      for (i = 0; i < taskContent.length; i++) {
         list = document.createElement('li');
-        list.innerHTML = task[i].slice(0, task.indexOf(',') - 2);
+        list.innerHTML = taskContent[i].slice(0, taskContent.indexOf(',') - 2);
         orderList.appendChild(list);
-        task1.push(task[i].slice(0, task.indexOf(',') - 2));
+        task.push(taskContent[i].slice(0, taskContent.indexOf(',') - 2));
 
 
 
-        if (task[i].slice(task.indexOf(',')) == 1) {
+        if (taskContent[i].slice(taskContent.indexOf(',')) == 1) {
           list.style.color = "red";
-        } else if (task[i].slice(task.indexOf(',')) == 2) {
+        } else if (taskContent[i].slice(taskContent.indexOf(',')) == 2) {
           list.style.color = "black";
-        } else if (task[i].slice(task.indexOf(',')) == 3) {
+        } else if (taskContent[i].slice(taskContent.indexOf(',')) == 3) {
           list.style.color = "grey";
         }
       }
-      console.log(typeof task1);
     }
 
-    taskContent = document.querySelector('ol');
-    taskContent.addEventListener('click', function(e) {
+    taskToDo = document.querySelector('ol');
+    taskToDo.addEventListener('click', function(e) {
       e.target.classList.toggle('checked');
     });
 
-    taskContent.addEventListener('dblclick', function(ev) {
+    taskToDo.addEventListener('dblclick', function(ev) {
       if (confirm("Do you want to delete the task?") == true) {
         ev.target.style.display = 'none';
       }
@@ -157,7 +156,7 @@
 
     function sendMail() {
       var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-      if (task1.length == 0) {
+      if (task.length == 0) {
         alert("Please add task first!")
       } else if (reg.test(document.getElementById('email').value) == false) {
         alert('Invalid Email Address');
@@ -165,7 +164,7 @@
 
         var link = "mailto:" + document.getElementById('email').value +
           "?subject=Task to do!" +
-          "&body=" + encodeURIComponent('Taks to do:\n' + task1);
+          "&body=" + encodeURIComponent('Taks to do:\n' + task);
 
         window.location.href = link;
       }
