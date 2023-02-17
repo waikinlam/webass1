@@ -91,11 +91,11 @@
       <button id='btn_add' class='addBtn'>Add</button>
       <button id='btn_hide' class='hideBtn'>Toggle</button>
       <p>Send Task By using email!</p>
-      <form>
-        Email:<input type="email" class="email" id="email" placeholder="abc@example.com">
 
-        <input type="submit" class="sendEmail" onclick="sendMail()" value='Send Email'>
-      </form>
+      Email:<input type="email" class="email" id="email" placeholder="abc@example.com">
+
+      <input type="submit" class="sendEmail" onclick='sendMail()' value='Send Email'>
+
 
       <!--         Send Email -->
     </div>
@@ -155,9 +155,13 @@
 
 
     function sendMail() {
+      var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
       if (task1.length == 0) {
         alert("Please add task first!")
+      } else if (reg.test(document.getElementById('email').value) == false) {
+        alert('Invalid Email Address');
       } else {
+
         var link = "mailto:" + document.getElementById('email').value +
           "?cc=" +
           "&body=" + encodeURIComponent('Taks to do:\n' + task1);
@@ -169,4 +173,5 @@
   </script>
 
 </html>
+
 
